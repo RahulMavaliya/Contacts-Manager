@@ -1,6 +1,6 @@
 package com.example.contactsmanager.navigation
 
-sealed class Routes (val routes : String){
+sealed class Routes (var routes : String){
     object Home : Routes("home")
 
     object Splash : Routes("splash")

@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.contactsmanager.database.Contact
 import com.example.contactsmanager.database.ContactDatabase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -12,10 +14,11 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class ContactViewModel @Inject constructor(val database: ContactDatabase) : ViewModel(){
 
     private var isSortByName = MutableStateFlow(false)
-
+    @OptIn(ExperimentalCoroutinesApi::class)
     private var contact = isSortByName.flatMapConcat {
 
         if (it){

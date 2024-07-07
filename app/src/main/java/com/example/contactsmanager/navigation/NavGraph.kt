@@ -13,19 +13,21 @@ import com.example.contactsmanager.viewmodel.ContactViewModel
 fun NavGraph(
     navHostController: NavHostController,
     viewModel: ContactViewModel,
-    state : ContactState,
-    onEvent : () -> Unit
-){
-    NavHost(navController = navHostController, startDestination = Routes.Splash.routes){
+    state: ContactState,
+    onEvent: () -> Unit
+) {
 
-        composable(Routes.Splash.routes){
+    NavHost(navController = navHostController, startDestination = Routes.Splash.routes) {
+
+        composable (Routes.Splash.routes){
             Splash(navHostController = navHostController)
         }
 
         composable(Routes.Home.routes){
-            Home(state = state,
+            Home(
+                state = state,
                 viewModel = viewModel
-            ){
+            ) {
                 onEvent()
             }
         }
