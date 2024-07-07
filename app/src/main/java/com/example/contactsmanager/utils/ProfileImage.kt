@@ -19,7 +19,8 @@ import kotlin.random.Random
 @Composable
 fun ProfileImage(name: String, onClick: () -> Unit = {Unit}) {
 
-    val firstLetter = name.first().toString()
+    val firstLetter = if (name.isNotEmpty()) name.first().uppercase()
+    else ""
     val backgroundColor = Color(Random.nextInt(256), Random.nextInt(256), Random.nextInt(256))
 
 

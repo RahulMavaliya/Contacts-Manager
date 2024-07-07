@@ -9,21 +9,21 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ContactViewModel @Inject constructor(val database: ContactDatabase) : ViewModel(){
+class ContactViewModel @Inject constructor(val database: ContactDatabase) : ViewModel() {
 
     private var isSortByName = MutableStateFlow(false)
     @OptIn(ExperimentalCoroutinesApi::class)
-    private var contact = isSortByName.flatMapConcat {
+    private var contact = isSortByName.flatMapLatest {
 
-        if (it){
+        if (it) {
             database.dao.getContactSortByName()
-        }else{
+        } else {
             database.dao.getContactSortByDate()
         }
     }.stateIn(
@@ -34,65 +34,68 @@ class ContactViewModel @Inject constructor(val database: ContactDatabase) : View
 
     val _state = MutableStateFlow(ContactState())
 
-    val state = combine(_state , contact , isSortByName){
-        _state , contact , isSortByName ->
+    val state = combine( _state, contact, isSortByName ){
+            _state, contact, isSortByName ->
 
         _state.copy(
-            contact = contact,
+            contact = contact
         )
     }.stateIn(
         scope = viewModelScope,
-        initialValue = ContactState(),
-        started = SharingStarted.WhileSubscribed()
+        started = SharingStarted.WhileSubscribed(),
+        initialValue = ContactState()
     )
 
-    fun changeSorting(){
+    fun changeSorting (){
         isSortByName.value = !isSortByName.value
     }
 
     fun deleteContact(){
+
         val contact = Contact(
+
             id = state.value.id.value,
             name = state.value.name.value,
             number = state.value.number.value,
-            dateOfCreation = state.value.dateOfCreation.value,
             gmail = state.value.gmail.value,
+            dateOfCreation = state.value.dateOfCreation.value,
             isActive = true
         )
-
         viewModelScope.launch {
-            database.dao.deleteContact(contact)
+            database.dao.deleteContact(contact = contact)
         }
 
         state.value.id.value = 0
-        state.value.name.value = ""
+        state.value.name.value =""
         state.value.number.value = ""
-        state.value.dateOfCreation.value = 0
         state.value.gmail.value = ""
+        state.value.dateOfCreation.value = 0
         state.value.image.value = ByteArray(0)
     }
 
-    fun saveContact(){
+
+    fun saveContact (){
 
         val contact = Contact(
+
             id = state.value.id.value,
             name = state.value.name.value,
             number = state.value.number.value,
-            dateOfCreation = System.currentTimeMillis(),
             gmail = state.value.gmail.value,
+            dateOfCreation = System.currentTimeMillis(),
             isActive = true,
             image = state.value.image.value
         )
 
         viewModelScope.launch {
-            database.dao.saveEditContact(contact)
+            database.dao.saveEditContact(contact = contact)
         }
 
         state.value.id.value = 0
-        state.value.name.value = ""
+        state.value.name.value =""
         state.value.number.value = ""
-        state.value.dateOfCreation.value = 0
         state.value.gmail.value = ""
+        state.value.dateOfCreation.value = 0
         state.value.image.value = ByteArray(0)
     }
 }

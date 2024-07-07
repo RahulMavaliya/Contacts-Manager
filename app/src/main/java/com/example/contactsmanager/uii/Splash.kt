@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.contactsmanager.R
 import com.example.contactsmanager.navigation.Routes
+import com.example.contactsmanager.ui.theme.PrimaryColor
 import kotlinx.coroutines.delay
 
 @Composable
@@ -23,7 +24,7 @@ fun Splash(navHostController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color.White),
+            .background(color = PrimaryColor),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -36,7 +37,7 @@ fun Splash(navHostController: NavHostController) {
 
     LaunchedEffect(key1 = true) {
 
-        delay(3000)
+        delay(1000)
 
         navHostController.navigate(Routes.Home.routes)
     }

@@ -74,24 +74,27 @@ import com.example.contactsmanager.utils.ProfileImage
 import com.example.contactsmanager.utils.compressImage
 import com.example.contactsmanager.viewmodel.ContactState
 import com.example.contactsmanager.viewmodel.ContactViewModel
+import java.io.InputStream
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Home (
-    state : ContactState,
+fun Home(
+    state: ContactState,
     viewModel: ContactViewModel,
-    onEvent : () -> Unit
+    onEvent: () -> Unit
 ) {
+
+
     val context = LocalContext.current
     val launcher =
-        rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()) {
-            uri: Uri? ->
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()) { uri: Uri? ->
 
             if (uri != null) {
-                val inputStream = context.contentResolver.openInputStream(uri)
+                val inputStream: InputStream? = context.contentResolver.openInputStream(uri)
                 val byte = inputStream?.readBytes()
 
-                if (byte != null){
+                if (byte != null) {
                     state.image.value = byte
 
                     val compressedImage = compressImage(byte)
@@ -107,6 +110,7 @@ fun Home (
         }
     var dialogShow by rememberSaveable { mutableStateOf(false) }
     var isSortByName by rememberSaveable { mutableStateOf(false) }
+    var isValid by rememberSaveable { mutableStateOf(true) }
 
     Scaffold(
         containerColor = Color.White,
@@ -144,7 +148,6 @@ fun Home (
                 }
             )
         },
-
         floatingActionButton = {
             FloatingActionButton(
                 containerColor = PrimaryColor,
@@ -158,7 +161,9 @@ fun Home (
                     colorFilter = ColorFilter.tint(color = Color.White)
                 )
             }
-        },modifier = Modifier
+        },
+
+        modifier = Modifier
             .fillMaxSize()
             .background(color = Color.White)
 
@@ -390,7 +395,7 @@ fun ShowContactCard(
     state: ContactState,
     data: Contact,
     viewModel: ContactViewModel,
-    launcher : ManagedActivityResultLauncher<String, Uri?>,
+    launcher : ManagedActivityResultLauncher<String,Uri?>,
     onEvent: () -> Unit
 
 ) {
