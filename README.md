@@ -24,9 +24,7 @@ Contacts Manager is an Android application that allows users to manage their con
 
 To use this App, follow these steps:
 
-1. Clone the repository:
-
-git clone https://github.com/RahulMavaliya/Contacts-Manager
+1. Clone the repository.
 
 2. Open the project in Android Studio.
 
