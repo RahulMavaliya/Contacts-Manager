@@ -32,6 +32,13 @@ To use this App, follow these steps:
 
 
 ## Screenshots
+<img src = "images/https://github.com/RahulMavaliya/Contacts-Manager/blob/master/images/Screenshot_2024-07-08-14-52-18-16_a0555f96bcc3cd4db7be0555e8676ae1.jpg" width = "100">
+<img src = "images/https://github.com/RahulMavaliya/Contacts-Manager/blob/master/images/Screenshot_2024-07-08-14-52-45-36_da8e1b33c587c7c6dfcf439d19f6f0d3.jpg" width = "100">
+<img src = "images/https://github.com/RahulMavaliya/Contacts-Manager/blob/master/images/Screenshot_2024-07-08-14-55-13-47_a0555f96bcc3cd4db7be0555e8676ae1.jpg" width = "100">
+<img src = "images/https://github.com/RahulMavaliya/Contacts-Manager/blob/master/images/Screenshot_2024-07-08-14-55-18-19_a0555f96bcc3cd4db7be0555e8676ae1.jpg" width = "100">
+<img src = "images/https://github.com/RahulMavaliya/Contacts-Manager/blob/master/images/Screenshot_2024-07-08-14-55-33-08_a0555f96bcc3cd4db7be0555e8676ae1.jpg" width = "100">
+<img src = "images/https://github.com/RahulMavaliya/Contacts-Manager/blob/master/images/Screenshot_2024-07-08-14-55-51-46_54063fc6848ac98a54ce5f2a63661433.jpg" width = "100">
+
 
 ## About Me
 I'm Rahul, an app developer specializing in Kotlin. I thrive on crafting efficient solutions and enjoy diving into competitive coding challenges to sharpen my skills. Let's connect and create something awesome together!
